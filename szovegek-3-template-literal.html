@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        'use strict';
+
+        // Írj egy függvényt, ami első paraméterként egy karaktert kap, a többi paraméter pedig tetszőleges számú tömb, 
+        // amik stringeket tartalmaznak!
+        // A függvény:
+        // összefűzi egy tömbbe az összes elemet,
+        // eltávolítja az ismétlődő elemeket,
+        // eltávolítja az összes olyan stringet, ami tartalmazza az első paraméterként megadott karaktert,
+        // eltávolítja a stringek végén lévő white space karaktert
+        // visszaadja ezt az új tömböt.
+
+        const caracter = 'a';
+
+        const array1 = ['aaa', 'ab', 'ac', 'ad'];
+        const array2 = ['d   ', 'e  ', 'f', 'g   '];
+        const array3 = ['d   ', 'e  ', 'sf', 'kg   '];
+
+        const template = (car, ...arr) => {
+            return arr
+                .flat()
+                .filter((item, index) => arr.flat().indexOf(item) === index)
+                .filter(item => !item.includes(car))
+                .map(item => item.trimEnd());
+            // return [...arr].flat().map(item => item.startsWith(car) ? item.trimEnd().slice(car.length,) : item.trimEnd());
+
+        };
+
+        document.body.innerHTML = template(caracter, array1, array2, array3);
+
+
+
+
+        // oktatói megoldás:
+        function customFilter(char, ...arrays) {
+            //const concatedArray = [...arrays].flat();
+            // console.log(arrays);
+            // console.log([...arrays]);
+            const concatedArray = arrays.flat();  //így is jó
+
+            //ismétlődő elemek eltávolítása
+            const noRepeat = concatedArray.filter((item, index) => concatedArray.indexOf(item) === index);
+            console.log(concatedArray);
+
+            //adott karakterrel rendelkező elemek eltávolítása
+            const removeIfIncludes = noRepeat.filter(item => item.indexOf(char) === -1);
+
+            //whitespace eltávolítása
+            const removeWhiteSpace = removeIfIncludes.map(item => item.trimEnd());
+            return removeWhiteSpace;
+        }
+        console.log(customFilter(caracter, array1, array2, array3));
+
+        // egyben:
+        function customFilter1(char, ...arrays) {
+            const concatedArray = arrays.flat();
+            return arrays
+                .flat()
+                .filter((item, index) => concatedArray.indexOf(item) === index)
+                .filter(item => item.indexOf(char) === -1)
+                .map(item => item.trimEnd());
+        }
+        console.log(customFilter1(caracter, array1, array2, array3));
+    </script>
+</body>
+
+</html>

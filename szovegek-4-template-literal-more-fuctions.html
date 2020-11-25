@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        'use strict';
+
+        // Alakítsd át úgy az előző feladatot, hogy ne egy függvényed legyen, 
+        // hanem minden egyes részfeladat legyen külön függvénybe szervezve, tehát:
+        // 1. függvény: első paraméterként egy karaktert kap, a többi paraméter pedig tetszőleges számú tömb, amik 
+        //    stringeket tartalmaznak! A függvény összefűzi egy tömbbe az összes elemet és visszaadja ezt az új tömböt,
+        // 2. függvény: egy paraméterként kapott tömbből eltávolítja az ismétlődő elemeket és visszaadja az új tömböt,
+        // 3. eltávolítja az összes olyan stringet, ami tartalmazza az első paraméterként megadott karaktert,
+        // 4. függvény: egy paraméterként kapott tömb összes elem elejéről és végéről levágja a space karaktereket, 
+        //    visszaad egy új tömböt.
+
+        const caracter = 'a';
+
+        const array1 = ['aaa', 'ab', 'ac', 'ad'];
+        const array2 = ['d   ', 'e  ', 'f', 'g   '];
+        const array3 = ['d   ', 'e  ', 'sf', 'kg   '];
+
+        const mergedArrays = (...arr) => {
+            return arr.flat()
+        };
+
+        const removeRepeat = (arr) => {
+            return arr.filter((item, index) => arr.flat().indexOf(item) === index)
+        };
+
+        const removeElementsWithCaracter = (car, arr) => {
+            return arr.filter(item => !item.includes(car))
+        };
+
+        const removeWhiteSpace = (arr) => {
+            return arr.map(item => item.trimEnd());
+        };
+
+        document.body.innerHTML = removeWhiteSpace(removeElementsWithCaracter(caracter, removeRepeat(mergedArrays(array1, array2, array3))));
+
+
+    </script>
+</body>
+
+</html>
